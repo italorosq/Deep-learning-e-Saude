@@ -144,8 +144,8 @@ Os classificadores são avaliados ao longo de **100 execuções independentes**,
 
 | Modelo | Acurácia Média |
 |---|---|
-| `MultinomialNB` | Alta — ideal para dados esparsos de texto |
-| `ComplementNB` | Alta — geralmente superior em dados desbalanceados |
+| `MultinomialNB` | Baixa — Cerca de 40% por conta da base ser complexa |
+| `ComplementNB` | Baixa — Leve aumento por conta de como o classificador funciona |
 
 ---
 
@@ -162,5 +162,5 @@ Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE)
 ---
 
 <div align="center">
-Feito com ❤️ por <a href="https://github.com/italorosq">italorosq</a>
+Feito  por <a href="https://github.com/italorosq">italorosq</a>
 </div>
