@@ -37,6 +37,10 @@ Deep-learning-e-Saude/
 ├── Database/
 │   ├── mtsamples.csv                  # Transcrições médicas com especialidades
 │   └── Disease precaution.csv         # Precauções por doença
+│   ├── df_balanced.csv                # Base balanceada
+│   ├── df_balanced_limpo.csv          # Base balanceada e limpa
+│   └── resultados_classificadores_nb_balanced_100runs_30folds.csv
+│                                     # Resultados consolidados dos classificadores
 │
 ├── Notebooks/
 │   └── notebookprincipal.ipynb        # Notebook principal com o pipeline completo
@@ -52,6 +56,9 @@ Deep-learning-e-Saude/
 |---|---|---|
 | `mtsamples.csv` | Mais de 4.000 transcrições médicas reais | `medical_specialty`, `transcription`, `description`, `keywords` |
 | `Disease precaution.csv` | Precauções recomendadas para diversas doenças | `Disease`, `Precaution_1` a `Precaution_4` |
+| `df_balanced.csv` | Amostra balanceada por especialidade | Derivada de `mtsamples.csv` |
+| `df_balanced_limpo.csv` | Texto pré-processado para modelagem | Derivada de `df_balanced.csv` |
+| `resultados_classificadores_nb_balanced_100runs_30folds.csv` | Métricas finais dos experimentos | Resultados de 100 execuções |
 
 ### Top 10 Especialidades Médicas
 
@@ -111,7 +118,7 @@ Resultados e Métricas
 
 ### Pré-requisitos
 
-- Python 3.8+
+- Python 3.12+
 - Jupyter Notebook ou JupyterLab
 
 ### Instalação
