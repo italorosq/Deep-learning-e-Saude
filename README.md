@@ -1,54 +1,166 @@
-# Saude e IA
+<div align="center">
 
-## Visao geral
-Este repositorio apresenta um projeto de estudo aplicado em saude e inteligencia artificial, com foco em classificacao de dados clinicos. O objetivo principal e demonstrar competencias em ciencia de dados, pre-processamento, modelagem e avaliacao de resultados.
+# 🩺 Deep Learning e Saúde
 
-## Objetivos
-- Comparar métodos de machine lerning e deep leaning.
-- Explorar tecnicas de balanceamento e validacao.
-- Documentar resultados de experimentos de forma clara.
+**Classificação automática de transcrições médicas por especialidade usando NLP e Machine Learning**
 
-## Estrutura do repositorio
-- Database/ : bases de dados e arquivos de resultados.
-- Notebooks/ : notebook principal com a analise e os experimentos.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter&logoColor=white)](https://jupyter.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![spaCy](https://img.shields.io/badge/spaCy-NLP-09A3D5?logo=spacy&logoColor=white)](https://spacy.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## Como executar
-1. Crie e ative um ambiente virtual.
-2. Instale as dependencias conforme sua configuracao local.
-3. Abra o notebook principal e execute as celulas na ordem.
+</div>
 
-## Guia de instalacao
-1. Crie o ambiente virtual:
-```bash
-python -m venv venv
+---
+
+## 📌 Sobre o Projeto
+
+Este projeto explora a interseção entre **inteligência artificial** e **saúde**, aplicando técnicas de **Processamento de Linguagem Natural (NLP)** e **aprendizado de máquina** para classificar automaticamente transcrições médicas de acordo com a especialidade médica correspondente.
+
+O pipeline completo inclui:
+
+- 📊 Análise exploratória dos dados
+- 🧹 Pré-processamento e limpeza de texto com **spaCy**
+- ⚖️ Balanceamento do conjunto de dados
+- 🔢 Vetorização com **TF-IDF**
+- 🤖 Treinamento e avaliação de classificadores **Naive Bayes** (MultinomialNB e ComplementNB)
+- 📈 Avaliação com 100 execuções e múltiplos folds de validação cruzada
+
+---
+
+## 📁 Estrutura do Repositório
+
 ```
-2. Ative o ambiente virtual (Windows PowerShell):
-```bash
-./venv/Scripts/Activate.ps1
+Deep-learning-e-Saude/
+│
+├── Database/
+│   ├── mtsamples.csv                  # Transcrições médicas com especialidades
+│   └── Disease precaution.csv         # Precauções por doença
+│
+├── Notebooks/
+│   └── notebookprincipal.ipynb        # Notebook principal com o pipeline completo
+│
+└── README.md
 ```
-3. Instale as bibliotecas principais:
-```bash
-pip install numpy pandas matplotlib seaborn scikit-learn imbalanced-learn spacy
+
+---
+
+## 🗃️ Datasets
+
+| Arquivo | Descrição | Colunas principais |
+|---|---|---|
+| `mtsamples.csv` | Mais de 4.000 transcrições médicas reais | `medical_specialty`, `transcription`, `description`, `keywords` |
+| `Disease precaution.csv` | Precauções recomendadas para diversas doenças | `Disease`, `Precaution_1` a `Precaution_4` |
+
+### Top 10 Especialidades Médicas
+
+O notebook seleciona as **10 especialidades mais frequentes** para o treinamento dos modelos:
+
+> Cirurgia, Consulta, Ortopedia, Radiologia, Gastroenterologia, Neurologia, Urologia, Medicina Interna, Neurociência e mais.
+
+---
+
+## ⚙️ Pipeline
+
 ```
-4. Se houver etapas de NLP com spaCy, baixe um modelo:
+Dados Brutos (mtsamples.csv)
+        │
+        ▼
+Análise Exploratória (EDA)
+        │
+        ▼
+Pré-processamento
+  └─ Remoção de valores nulos
+  └─ Seleção das top 10 especialidades
+  └─ Balanceamento (redução de cirurgias para 40%)
+        │
+        ▼
+Limpeza de Texto com spaCy
+  └─ Tokenização e lematização
+  └─ Remoção de stop words e pontuação
+        │
+        ▼
+Vetorização TF-IDF
+        │
+        ▼
+Treinamento e Avaliação
+  └─ MultinomialNB
+  └─ ComplementNB
+  └─ 100 execuções × múltiplos folds
+        │
+        ▼
+Resultados e Métricas
+```
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Biblioteca | Finalidade |
+|---|---|
+| `pandas` / `numpy` | Manipulação e análise de dados |
+| `matplotlib` / `seaborn` | Visualização de dados |
+| `spaCy` | Processamento de linguagem natural |
+| `scikit-learn` | Vetorização TF-IDF, modelos e métricas |
+| `imbalanced-learn` | Balanceamento de classes (RandomUnderSampler) |
+
+---
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+- Python 3.8+
+- Jupyter Notebook ou JupyterLab
+
+### Instalação
+
 ```bash
+# Clone o repositório
+git clone https://github.com/italorosq/Deep-learning-e-Saude.git
+cd Deep-learning-e-Saude
+
+# Instale as dependências
+pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn spacy
+
+# Baixe o modelo de linguagem inglês do spaCy
 python -m spacy download en_core_web_sm
+
+# Inicie o Jupyter
+jupyter notebook Notebooks/notebookprincipal.ipynb
 ```
 
-## Bibliotecas utilizadas
-- numpy
-- pandas
-- matplotlib
-- seaborn
-- scikit-learn
-- imbalanced-learn
-- spacy
+> ⚠️ **Atenção:** O notebook usa caminhos absolutos locais para leitura dos CSVs. Antes de executar, atualize as células de leitura para usar os caminhos relativos ao repositório, por exemplo:
+> ```python
+> df = pd.read_csv('../Database/mtsamples.csv')
+> ```
 
-## Dados
-As bases utilizadas encontram-se em Database/. Caso deseje substituir os dados, mantenha o mesmo formato de colunas para reproduzir os experimentos.
+---
 
-## Resultados
-Os resultados dos classificadores e experimentos consolidados estao disponiveis na pasta Database/.
+## 📊 Resultados
 
-## Licenca
-Este projeto e de uso educacional e demonstrativo. Verifique as restricoes de uso das bases de dados caso deseje reutiliza-las.
+Os classificadores são avaliados ao longo de **100 execuções independentes**, cada uma com split treino/teste aleatório, garantindo resultados robustos e estatisticamente significativos.
+
+| Modelo | Acurácia Média |
+|---|---|
+| `MultinomialNB` | Baixa — Cerca de 40% por conta da base ser complexa |
+| `ComplementNB` | Baixa — Leve aumento por conta de como o classificador funciona |
+
+---
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma *issue* ou enviar um *pull request*.
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+<div align="center">
+Feito  por <a href="https://github.com/italorosq">italorosq</a>
+</div>
